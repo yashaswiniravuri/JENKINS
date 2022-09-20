@@ -1,5 +1,5 @@
+// Added for demo
 node{
-// demo
    stage('SCM Checkout'){
      git 'https://github.com/javahometech/my-app'
    }
@@ -22,10 +22,14 @@ node{
       Hari''', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'hari.kammana@gmail.com'
    }
    stage('Slack Notification'){
+       sendSlackNotifications(message='Welcome to Jenkins, Slack!',msgColor='good')
+   }
+   
+   def sendSlackNotifications(String message, String msgColor){
        slackSend baseUrl: 'https://hooks.slack.com/services/',
        channel: '#jenkins-pipeline-demo',
-       color: 'good', 
-       message: 'Welcome to Jenkins, Slack!', 
+       color: msgColor, 
+       message: message, 
        teamDomain: 'javahomecloud',
        tokenCredentialId: 'slack-demo'
    }
